@@ -25,20 +25,23 @@ exports.registerController = (req, res) => {
   });
 };
 
-
 // Login
 exports.loginController = (req, res) => {
   User.findOne({ username: req.body.username }, (err, user) => {
-    if (err) {
-      res.status(500).json({ msg: err });
-    } else if (!user) {
-      res.status(404).json({ msg: "User not found" });
-    } else {
-      if (req.body.password === user.password) {
-        res.json({ msg: "Logged in!" });
+    try {
+      if (err) {
+        res.status(500).json({ msg: err });
+      } else if (!user) {
+        res.json({ msg: "User not found" });
       } else {
-        res.status(401).json({ msg: "Wrong username or password" });
+        if (req.body.password === user.password) {
+          res.json({ msg: "Logged in" });
+        } else {
+          res.json({ msg: "Wrong username or password" });
+        }
       }
+    } catch (error) {
+      res.status(501).json({ msg: error });
     }
   });
 };
