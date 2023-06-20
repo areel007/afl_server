@@ -5,8 +5,11 @@ const newSchema = new mongoose.Schema({
     type: String,
     required: [true, "News must have a title"],
   },
-  details: {
+  subtitle: {
     type: String,
+  },
+  content: {
+    type: Object,
     required: [true, "News must have a detail"],
   },
   imageUrl: {
@@ -14,6 +17,7 @@ const newSchema = new mongoose.Schema({
   },
   category: {
     type: String,
+    required: [true, "News must have a category"],
   },
   createdAt: {
     type: Date,

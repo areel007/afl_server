@@ -45,13 +45,3 @@ exports.loginController = (req, res) => {
     }
   });
 };
-
-exports.updateInvestment = (req, res) => {
-  User.updateOne({ _id: req.params.id }, { $set: req.body }, (err) => {
-    if (err) {
-      res.status(500).json({ msg: err });
-    } else {
-      res.json({ msg: "User updated!" });
-    }
-  });
-};

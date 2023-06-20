@@ -28,7 +28,7 @@ exports.postNewsController = (req, res) => {
   const uploadSingle = upload("afl-bucket").single("imageUrl");
 
   uploadSingle(req, res, async (err) => {
-    const { title, details, category } = req.body;
+    const { title, content, category, subtitle } = req.body;
     const imageUrl = req.file.location;
     if (err) return res.status(400).json({ msg: err.message });
 
@@ -36,7 +36,8 @@ exports.postNewsController = (req, res) => {
 
     const newNews = await new News({
       title,
-      details,
+      subtitle,
+      content,
       imageUrl,
       category,
     });
@@ -50,7 +51,7 @@ exports.postNewsController = (req, res) => {
 exports.allNewsController = async (req, res) => {
   const resource = await News.find();
   const page = req.query.p || 0;
-  const newsPerPage = 6;
+  const newsPerPage = 3;
 
   await News.find()
     .skip(page * newsPerPage)
