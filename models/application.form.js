@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const applicationFormSchema = new mongoose.Schema({
+  position: {
+    type: String,
+    required: [true, "This field is required"],
+  },
   firstname: {
     type: String,
     required: [true, "This field is required"],

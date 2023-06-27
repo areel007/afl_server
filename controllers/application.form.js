@@ -2,6 +2,7 @@ const ApplicationForm = require("../models/application.form");
 
 exports.submitApplication = async (req, res) => {
   const {
+    position,
     firstname,
     lastname,
     middleName,
@@ -16,6 +17,7 @@ exports.submitApplication = async (req, res) => {
 
   try {
     const application = await ApplicationForm({
+      position,
       firstname,
       lastname,
       middleName,
